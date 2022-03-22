@@ -52,12 +52,12 @@ class App extends React.Component {
       <>
         <h1>Data from API</h1>
         <form onSubmit={this.getCityData}>
-          <label>Pick a City:
+          <label>Type the name of a City:
             <input type='text' onInput={this.handleCityInput} />
             <button type="submit">Explore!</button>
           </label>
         </form>
-        <img src={this.state.map} alt="Map of Seattle"/> 
+        <img src={this.state.map} alt="Map"/> 
         {this.state.error
           ?
           <p>{this.state.errorMessage}</p>
