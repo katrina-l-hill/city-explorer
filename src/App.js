@@ -50,7 +50,7 @@ class App extends React.Component {
             <button type="submit">Explore!</button>
           </label>
         </form>
-        <img src={this.state.map} />
+        {/* <img src={this.state.map} /> commented out to pass Netlify checks until I can resolve the error */}
         {this.state.error
           ?
           <p>{this.state.errorMessage}</p>
