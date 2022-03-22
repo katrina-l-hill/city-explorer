@@ -2,6 +2,7 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import { Card } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor(props) {
@@ -63,9 +64,10 @@ class App extends React.Component {
           <p>{this.state.errorMessage}</p>
           :
           <Card>
-            <Card.Body>
+            <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=14`} />
+            {/* <Card.Body>
               <p></p>
-            </Card.Body>
+            </Card.Body> */}
           </Card>
           // <ul>
           //   {cityDataListItems}
