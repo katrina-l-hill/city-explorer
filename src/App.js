@@ -38,7 +38,7 @@ class App extends React.Component {
           map: mapPng
       })
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       this.setState({
         error: true,
         errorMessage: `An error has occured: ${error.response.status}`
@@ -46,7 +46,7 @@ class App extends React.Component {
     }
   };
   render() {
-    console.log('map render',this.state.map);
+    // console.log('map render',this.state.map);
     let cityDataListItems = this.state.cityData.map((city, index) => <li key={index}>{city.display_name}</li>);
     return (
       <>
