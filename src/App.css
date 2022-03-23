@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+h1 {
+  font-size: 1.5rem;
+  color:darkviolet;
+  font-family:cursive;
+}
+label {
+  font-size: .9rem;
+  color: blue;
+  font-style: italic;
+}
+img {
+  font-size: .9rem;
+  color:blue
+}
+button {
+  margin-left: 10px;
+  background-color:lemonchiffon;
+  font-style:oblique;
+}
+form {
+  padding: 1rem;
+}
+

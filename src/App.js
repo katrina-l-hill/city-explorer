@@ -25,14 +25,20 @@ class App extends React.Component {
     try {
       // get the data from the API
       let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
-      let mapPng = await axios.get(`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=40.7484284,-73.9856546198733&zoom=14`);
+
       // save that data into state
       this.setState({
         cityData: cityData.data,
-        map: mapPng.data
+      
       });
+      console.log(this.state.cityData);
+      let mapPng = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=14`;
+      console.log(mapPng);
+      this.setState({
+          map: mapPng
+      })
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       this.setState({
         error: true,
         errorMessage: `An error has occured: ${error.response.status}`
@@ -40,17 +46,18 @@ class App extends React.Component {
     }
   };
   render() {
+    // console.log('map render',this.state.map);
     let cityDataListItems = this.state.cityData.map((city, index) => <li key={index}>{city.display_name}</li>);
     return (
       <>
         <h1>Data from API</h1>
         <form onSubmit={this.getCityData}>
-          <label>Pick a City:
+          <label>Type the name of a City:
             <input type='text' onInput={this.handleCityInput} />
             <button type="submit">Explore!</button>
           </label>
         </form>
-        {/* <img src={this.state.map} /> commented out to pass Netlify checks until I can resolve the error */}
+        <img src={this.state.map} alt="Map"/> 
         {this.state.error
           ?
           <p>{this.state.errorMessage}</p>
@@ -58,25 +65,7 @@ class App extends React.Component {
           <ul>
             {cityDataListItems}
           </ul>
-        /* function App() {
-          return (
-            <div className="App">
-              <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                  Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                  className="App-link"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn React
-                </a>
-              </header>
-            </div> */}
-        {/* ); */}
+        }
       </>
     );
   }
