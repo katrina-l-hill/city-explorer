@@ -11,13 +11,13 @@ class App extends React.Component {
       error: false,
       errorMessage: '',
       map: ''
-    }
+    };
   }
   handleCityInput = (event) => {
     this.setState({
       city: event.target.value
-    })
-  }
+    });
+  };
   //query string format: http://somesite.com?key=value&key2=value&key3=value
 
   getCityData = async (event) => {
@@ -29,14 +29,13 @@ class App extends React.Component {
       // save that data into state
       this.setState({
         cityData: cityData.data,
-      
       });
       console.log(this.state.cityData);
       let mapPng = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=14`;
       console.log(mapPng);
       this.setState({
-          map: mapPng
-      })
+        map: mapPng
+      });
     } catch (error) {
       // console.log(error);
       this.setState({
@@ -57,7 +56,7 @@ class App extends React.Component {
             <button type="submit">Explore!</button>
           </label>
         </form>
-        <img src={this.state.map} alt="Map"/> 
+        <img src={this.state.map} alt="Map" />
         {this.state.error
           ?
           <p>{this.state.errorMessage}</p>
