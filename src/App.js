@@ -1,7 +1,10 @@
 // import logo from './logo.svg';
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios';
+import Weather from './Weather';
+//import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +13,9 @@ class App extends React.Component {
       cityData: [],
       error: false,
       errorMessage: '',
-      map: ''
+      map: '',
+      weatherData: [],
+      debug: false // This is a workaround due to running out of API calls while trying to get lat, lon, and Weather.js task completed.
     };
   }
   handleCityInput = (event) => {
@@ -18,26 +23,31 @@ class App extends React.Component {
       city: event.target.value
     });
   };
-  //query string format: http://somesite.com?key=value&key2=value&key3=value
-
   getCityData = async (event) => {
     event.preventDefault();
     try {
       // get the data from the API
       let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
+      //console.log(cityData);
 
       // save that data into state
       this.setState({
         cityData: cityData.data,
       });
-      console.log(this.state.cityData);
+      //console.log(this.state.cityData);
       let mapPng = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=14`;
-      console.log(mapPng);
+      //console.log(mapPng);
       this.setState({
         map: mapPng
       });
-    } catch (error) {
-      // console.log(error);
+      //call to your weather service and get the forecasts to display in a react component
+      let weatherApiUrl = this.state.debug ? `http://localhost:3001/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}` : `https://city-explorer-api-proj.herokuapp.com/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}`;
+      let forecastData = await axios.get(weatherApiUrl);
+      this.setState({
+        weatherData: forecastData.data
+      });
+    }
+    catch (error) {
       this.setState({
         error: true,
         errorMessage: `An error has occured: ${error.response.status}`
@@ -65,6 +75,7 @@ class App extends React.Component {
             {cityDataListItems}
           </ul>
         }
+        <Weather weatherData={this.state.weatherData} />
       </>
     );
   }
