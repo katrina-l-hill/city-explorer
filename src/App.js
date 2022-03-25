@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios';
 import Weather from './Weather';
+import Movie from './Movie';
 //import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 class App extends React.Component {
@@ -15,6 +16,7 @@ class App extends React.Component {
       errorMessage: '',
       map: '',
       weatherData: [],
+      movieData: [],
       debug: false // This is a workaround due to running out of API calls while trying to get lat, lon, and Weather.js task completed.
     };
   }
@@ -28,19 +30,18 @@ class App extends React.Component {
     try {
       // get the data from the API
       let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
-      //console.log(cityData);
-
+      
       // save that data into state
       this.setState({
         cityData: cityData.data,
       });
-      //console.log(this.state.cityData);
+      
       let mapPng = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=14`;
-      //console.log(mapPng);
+      
       this.setState({
         map: mapPng
       });
-      //call to your weather service and get the forecasts to display in a react component
+      //call to the weather service and get the forecasts to display in a react component
       let weatherApiUrl = this.state.debug ? `http://localhost:3001/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}` : `https://city-explorer-api-proj.herokuapp.com/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}`;
       let forecastData = await axios.get(weatherApiUrl);
       this.setState({
@@ -54,8 +55,33 @@ class App extends React.Component {
       });
     }
   };
+  getMovieData = async (event) => {
+    event.preventDefault();
+    try {
+      // get the data from the API
+      let movieData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
+      
+      // save that data into state
+      this.setState({
+        movieData: movieData.data,
+      });
+     
+      //call to TMDB and get the movies to display in a react component
+      let movieApiUrl = this.state.debug ? `http://localhost:3001/weather?l=${movieData.data.results}&=${cityData.data.results}` : `https://city-explorer-api-proj.herokuapp.com/movie?lat=${movieData.data.results}&${movieData.data.results}`;
+      let movieSiteData = await axios.get(movieApiUrl);
+      this.setState({
+        movieData: movieSiteData.data
+      });
+    }
+    catch (error) {
+      this.setState({
+        error: true,
+        errorMessage: `An error has occured: ${error.response.status}`
+      });
+    }
+  };
   render() {
-    // console.log('map render',this.state.map);
+    
     let cityDataListItems = this.state.cityData.map((city, index) => <li key={index}>{city.display_name}</li>);
     return (
       <>
@@ -76,6 +102,7 @@ class App extends React.Component {
           </ul>
         }
         <Weather weatherData={this.state.weatherData} />
+        <Movie movieData={this.state.movieData} />
       </>
     );
   }
