@@ -42,7 +42,7 @@ class App extends React.Component {
         map: mapPng
       });
       //call to the weather service and get the forecasts to display in a react component
-      let weatherApiUrl = this.state.debug ? `http://localhost:3001/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}` : `https://city-explorer-api-proj.herokuapp.com/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}`;
+      let weatherApiUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}`;
       let forecastData = await axios.get(weatherApiUrl);
       this.setState({
         weatherData: forecastData.data
@@ -56,7 +56,7 @@ class App extends React.Component {
     }
     try {
       //call to TMDB and get the movies to display in a react component
-      let movieApiUrl = this.state.debug ? `http://localhost:3001/movies?city_name=${this.state.city}` : `https://city-explorer-api-proj.herokuapp.com/movies?city_name=${this.state.city}`;
+      let movieApiUrl = `${process.env.REACT_APP_SERVER}/movie?city_name=${this.state.city}`;
       let movieSiteData = await axios.get(movieApiUrl);
       this.setState({
         movieData: movieSiteData.data
