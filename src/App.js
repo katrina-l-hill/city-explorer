@@ -30,14 +30,14 @@ class App extends React.Component {
     try {
       // get the data from the API
       let cityData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
-      
+
       // save that data into state
       this.setState({
         cityData: cityData.data,
       });
-      
+
       let mapPng = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=14`;
-      
+
       this.setState({
         map: mapPng
       });
@@ -54,7 +54,7 @@ class App extends React.Component {
         errorMessage: `An error has occured: ${error.response.status}`
       });
     }
-    try {         
+    try {
       //call to TMDB and get the movies to display in a react component
       let movieApiUrl = this.state.debug ? `http://localhost:3001/movies?city_name=${this.state.city}` : `https://city-explorer-api-proj.herokuapp.com/movies?city_name=${this.state.city}`;
       let movieSiteData = await axios.get(movieApiUrl);
@@ -71,7 +71,7 @@ class App extends React.Component {
   };
 
   render() {
-    
+
     let cityDataListItems = this.state.cityData.map((city, index) => <li key={index}>{city.display_name}</li>);
     return (
       <>
