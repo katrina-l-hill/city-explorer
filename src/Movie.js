@@ -12,13 +12,15 @@ class Movie extends React.Component {
     if (this.props.movieData.length > 0) {
       movieObjs = this.props.movieData.map((item, index) =>
         <div key={index}>
-          <div>Forecast date: {item.date}</div><div>Weather description: {item.description}</div>
+          <img src={'https://image.tmdb.org/t/p/w500' + item.poster_path} alt={item.title} />
+          <div>Title: {item.title}</div>
+          <div>Movie Overview: {item.overview}</div>
         </div>
       );
     }
     return (
       <>
-        {weatherObjs}
+        {movieObjs}
       </>
     );
   }

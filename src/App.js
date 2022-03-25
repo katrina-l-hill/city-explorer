@@ -54,20 +54,9 @@ class App extends React.Component {
         errorMessage: `An error has occured: ${error.response.status}`
       });
     }
-  };
-  getMovieData = async (event) => {
-    event.preventDefault();
-    try {
-      // get the data from the API
-      let movieData = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
-      
-      // save that data into state
-      this.setState({
-        movieData: movieData.data,
-      });
-     
+    try {         
       //call to TMDB and get the movies to display in a react component
-      let movieApiUrl = this.state.debug ? `http://localhost:3001/weather?l=${movieData.data.results}&=${cityData.data.results}` : `https://city-explorer-api-proj.herokuapp.com/movie?lat=${movieData.data.results}&${movieData.data.results}`;
+      let movieApiUrl = this.state.debug ? `http://localhost:3001/movies?city_name=${this.state.city}` : `https://city-explorer-api-proj.herokuapp.com/movies?city_name=${this.state.city}`;
       let movieSiteData = await axios.get(movieApiUrl);
       this.setState({
         movieData: movieSiteData.data
@@ -80,6 +69,7 @@ class App extends React.Component {
       });
     }
   };
+
   render() {
     
     let cityDataListItems = this.state.cityData.map((city, index) => <li key={index}>{city.display_name}</li>);
