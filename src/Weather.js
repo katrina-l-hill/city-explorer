@@ -12,7 +12,7 @@ class Weather extends React.Component {
     let weatherObjs = [];
     if (this.props.weatherData.length > 0) {
       weatherObjs = this.props.weatherData.map((item, index) =>
-        <WeatherDay dayForecast = {item} />
+        <WeatherDay key={index} dayForecast={item} />
       );
     }
     return (

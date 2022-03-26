@@ -8,12 +8,10 @@ class WeatherDay extends React.Component {
     super(props);
   }
   render() {
-    
-    
     return (
       <>
-        <div>{this.props.dayForecast.valid_date}</div>
-        <div>{this.props.dayForecast.description}</div>
+        <div>Date: {this.props.dayForecast.date}</div>
+        <div>Description: {this.props.dayForecast.description}</div>
       </>
     );
   }

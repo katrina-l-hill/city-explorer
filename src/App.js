@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios';
 import Weather from './Weather';
-import Movie from './Movie';
+import Movies from './Movies';
 //import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
       map: '',
       weatherData: [],
       movieData: [],
-      debug: false // This is a workaround due to running out of API calls while trying to get lat, lon, and Weather.js task completed.
+      debug: true // This is a workaround due to running out of API calls while trying to get lat, lon, and Weather.js task completed.
     };
   }
   handleCityInput = (event) => {
@@ -56,7 +56,7 @@ class App extends React.Component {
     }
     try {
       //call to TMDB and get the movies to display in a react component
-      let movieApiUrl = `${process.env.REACT_APP_SERVER}/movie?city_name=${this.state.city}`;
+      let movieApiUrl = `${process.env.REACT_APP_SERVER}/movies?city_name=${this.state.city}`;
       let movieSiteData = await axios.get(movieApiUrl);
       this.setState({
         movieData: movieSiteData.data
@@ -92,7 +92,7 @@ class App extends React.Component {
           </ul>
         }
         <Weather weatherData={this.state.weatherData} />
-        <Movie movieData={this.state.movieData} />
+        <Movies movieData={this.state.movieData} />
       </>
     );
   }

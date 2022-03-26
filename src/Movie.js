@@ -8,23 +8,17 @@ class Movie extends React.Component {
     super(props);
   }
   render() {
-    let movieObjs = [];
-    if (this.props.movieData.length > 0) {
-      movieObjs = this.props.movieData.map((item, index) =>
-        <div key={index}>
-          <img src={'https://image.tmdb.org/t/p/w500' + item.poster_path} alt={item.title} />
-          <div>Title: {item.title}</div>
-          <div>Release Date: {item.release_date}</div>
-          <div>Movie Overview: {item.overview}</div>
-          <div>Average Viewer Votes: {item.vote_average}</div>
-          <div># of Votes: {item.vote_count}</div>
-          <div>Genre: {item.genre_ids}</div>
-        </div>
-      );
-    }
     return (
       <>
-        {movieObjs}
+        <div key={this.props.index}>
+          <img src={'https://image.tmdb.org/t/p/w500' + this.props.movie.poster_path} alt={this.props.movie.title} />
+          <div>Title: {this.props.movie.title}</div>
+          <div>Release Date: {this.props.movie.release_date}</div>
+          <div>Movie Overview: {this.props.movie.overview}</div>
+          <div>Average Viewer Votes: {this.props.movie.vote_average}</div>
+          <div># of Votes: {this.props.movie.vote_count}</div>
+          <div>Genre: {this.props.movie.genre_ids}</div>
+        </div>
       </>
     );
   }
