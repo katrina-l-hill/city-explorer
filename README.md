@@ -24,10 +24,12 @@
 
 - Name of feature: _City-Explorer___________________
 - Estimate of time needed to complete: _~5 hours____
-- Start time: _3:10pm, 8:20pm (3/21/22)_2:30pm_(3/24/22)___
-- Finish time: _6:30pm, 10:45pm (3/21/22)____
+- Start time: _3:10pm, 8:20pm (3/21/22);_2:30pm_(3/24/22);_1:15pm (3/25/22) __
+- Finish time: _6:30pm, 10:45pm (3/21/22);_5:00pm_(3/23/22); 5:30pm (3/25/22)__
 - Actual time needed to complete: _Today, I needed ~5.5 hours to work on the code, to-do list tasks, and README file but they're not complete. I still have work to do to complete everything. I will probably need an additional approx. 2 hours to complete the assignment.__
 
 ## WRRC
 ![WRRC - Lab06](WRRC.jpg)
 ![WRRC - Lab07](WRRC2.png)
+![WRRC - Lab08](WRRC-lab08.png)
+![WRRC - Lab09](lab09WRRC.png)
