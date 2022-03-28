@@ -12,7 +12,7 @@ class Movies extends React.Component {
     let movieObjs = [];
     if (this.props.movieData.length > 0) {
       movieObjs = this.props.movieData.map((item, index) =>
-        <Movie index={index} movie={item} />
+        <Movie key={index} movie={item} />
       );
     }
     return (
