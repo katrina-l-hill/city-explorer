@@ -43,7 +43,9 @@ class App extends React.Component {
       });
       //call to the weather service and get the forecasts to display in a react component
       let weatherApiUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${cityData.data[0].lat}&lon=${cityData.data[0].lon}`;
+      console.log(weatherApiUrl);
       let forecastData = await axios.get(weatherApiUrl);
+      console.log(forecastData);
       this.setState({
         weatherData: forecastData.data
       });
