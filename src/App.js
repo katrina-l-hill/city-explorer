@@ -1,11 +1,17 @@
 // import logo from './logo.svg';
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios';
 import Weather from './Weather';
 import Movies from './Movies';
 //import { isCompositeComponentWithType } from 'react-dom/test-utils';
+// var express = require('express');
+// var cors = require('cors');
+// var app = express();
+
+// app.use(cors());
+
 
 class App extends React.Component {
   constructor(props) {

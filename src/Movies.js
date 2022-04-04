@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Movie from './Movie';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Movies extends React.Component {
   constructor(props) {
